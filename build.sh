@@ -45,7 +45,7 @@ pciutils
 usbutils
 network-manager
 sudo
-polkitd
+policykit-1
 policykit-1-gnome
 fonts-dejavu-core
 PACKAGES
