@@ -11,7 +11,7 @@ lb config \
   --linux-flavours 686-pae \
   --linux-packages linux-image \
   --binary-images iso-hybrid \
-  --debian-installer live \
+  --debian-installer false \
   --debian-installer-gui false \
   --security false \
   --archive-areas 'main contrib non-free' \
