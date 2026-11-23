@@ -77,6 +77,16 @@ if [ -d "$BOOTDIR" ]; then
 
     echo "ISOLINUX: файлы загрузчика исправлены"
 fi
+# Совместимость старого live-build с librsvg
+apt-get install -y librsvg2-bin
+
+if ! command -v rsvg >/dev/null 2>&1; then
+    ln -s "$(command -v rsvg-convert)" /usr/local/bin/rsvg
+fi
+
+echo "Проверка SVG:"
+command -v rsvg
+command -v rsvg-convert
 lb build 2>&1 | tee build.log
 find . -maxdepth 1 -name '*.iso' -exec cp -v {} output/ \;
 sha256sum output/*.iso > output/SHA256SUMS
