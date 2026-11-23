@@ -65,11 +65,17 @@ apt-get install -y isolinux syslinux-common
 # Исправляем шаблоны загрузчика ISOLINUX
 apt-get install -y isolinux syslinux-common
 
+# Исправление битых ссылок ISOLINUX
 BOOTDIR=/usr/share/live/build/bootloaders/isolinux
 
 if [ -d "$BOOTDIR" ]; then
-    cp -L /usr/lib/ISOLINUX/isolinux.bin "$BOOTDIR/isolinux.bin"
-    cp -L /usr/lib/syslinux/modules/bios/vesamenu.c32 "$BOOTDIR/vesamenu.c32"
+    rm -f "$BOOTDIR/isolinux.bin"
+    rm -f "$BOOTDIR/vesamenu.c32"
+
+    cp /usr/lib/ISOLINUX/isolinux.bin "$BOOTDIR/isolinux.bin"
+    cp /usr/lib/syslinux/modules/bios/vesamenu.c32 "$BOOTDIR/vesamenu.c32"
+
+    echo "ISOLINUX: файлы загрузчика исправлены"
 fi
 lb build 2>&1 | tee build.log
 find . -maxdepth 1 -name '*.iso' -exec cp -v {} output/ \;
