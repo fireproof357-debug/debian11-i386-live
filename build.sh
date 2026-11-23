@@ -8,7 +8,6 @@ lb config \
   --distribution bullseye \
   --architectures i386 \
   --binary-images iso-hybrid \
-  --bootloaders syslinux \
   --debian-installer live \
   --debian-installer-gui false \
   --archive-areas 'main contrib non-free' \
