@@ -7,6 +7,8 @@ lb config \
   --mode debian \
   --distribution bullseye \
   --architectures i386 \
+  --linux-flavours 686-pae \
+  --linux-packages linux-image \
   --binary-images iso-hybrid \
   --debian-installer live \
   --debian-installer-gui false \
