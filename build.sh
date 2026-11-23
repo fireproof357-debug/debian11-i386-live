@@ -7,6 +7,7 @@ lb config \
   --mode debian \
   --distribution bullseye \
   --architectures i386 \
+  --firmware-chroot false \
   --linux-flavours 686-pae \
   --linux-packages linux-image \
   --binary-images iso-hybrid \
