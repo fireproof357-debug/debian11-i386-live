@@ -1,13 +1,13 @@
-# Debian 11 i386 Live ISO with GParted
+# Debian 11 i386 Live + GParted
 
-Experimental GitHub Actions build for older 32-bit x86 PCs, using Debian Bullseye and live-build.
+Experimental Legacy BIOS 32-bit Debian 11 Bullseye Live ISO for IDE/SATA/USB disks. Uses Openbox and GParted. **Installer is disabled** in this first build. No image has been tested on hardware yet.
 
-## Build
-Open **Actions → Build Debian 11 i386 Live ISO → Run workflow**. Download the ISO artifact when the workflow succeeds.
+## GitHub
+Upload `.github/workflows/build.yml`, `build.sh` and this README to the repository root. Open **Actions → Build Debian 11 i386 Live ISO → Run workflow**. After success download artifact `debian11-i386-gparted-live`.
 
 ## Notes
-- Debian 11 is old and its repositories may be archived; building against archive.debian.org can require additional adjustments.
-- The `--debian-installer live` option is intended to include the live installer, but availability of archived i386 installer components is not guaranteed. Verify the boot menu and installation in a virtual machine before using real disks.
-- Requires i686-class CPU; not original Intel 80386.
-- This is an untested build recipe, not a verified bootable ISO.
-- GParted performs destructive disk operations; back up data before editing partitions.
+- Debian 11 is past standard security support; use offline or in trusted environments.
+- Requires an i686-compatible processor with PAE for the `686-pae` kernel (many Pentium 4 models support it).
+- Builds inside `debian:bullseye` with `--privileged` to allow chroot mounts.
+- The build is experimental; validate boot, Openbox and GParted in a VM before writing a USB stick.
+- If GParted does not start automatically, run `sudo gparted` in LXTerminal.
