@@ -4,6 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 mkdir -p output
 lb clean --purge || true
 lb config \
+  --bootloader syslinux \
   --mode debian \
   --distribution bullseye \
   --architectures i386 \
@@ -23,7 +24,6 @@ lb config \
   --checksums sha256
 mkdir -p config/package-lists config/hooks/normal
 cat > config/package-lists/desktop.list.chroot <<'PACKAGES'
-linux-image-686
 live-boot
 live-config
 xorg
@@ -58,6 +58,19 @@ cat > /etc/skel/.config/openbox/autostart <<'AUTO'
 AUTO
 HOOK
 chmod +x config/hooks/normal/010-live-user.hook.chroot
+# Подготовка загрузчика для Legacy BIOS
+apt-get update
+apt-get install -y isolinux syslinux-common
+
+# Исправляем шаблоны загрузчика ISOLINUX
+apt-get install -y isolinux syslinux-common
+
+BOOTDIR=/usr/share/live/build/bootloaders/isolinux
+
+if [ -d "$BOOTDIR" ]; then
+    cp -L /usr/lib/ISOLINUX/isolinux.bin "$BOOTDIR/isolinux.bin"
+    cp -L /usr/lib/syslinux/modules/bios/vesamenu.c32 "$BOOTDIR/vesamenu.c32"
+fi
 lb build 2>&1 | tee build.log
 find . -maxdepth 1 -name '*.iso' -exec cp -v {} output/ \;
 sha256sum output/*.iso > output/SHA256SUMS
