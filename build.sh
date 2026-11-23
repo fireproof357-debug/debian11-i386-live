@@ -10,6 +10,8 @@ lb config \
   --binary-images iso-hybrid \
   --debian-installer live \
   --debian-installer-gui false \
+  --security false \
+  --updates false \
   --archive-areas 'main contrib non-free' \
   --mirror-bootstrap 'http://archive.debian.org/debian/' \
   --mirror-chroot 'http://archive.debian.org/debian/' \
